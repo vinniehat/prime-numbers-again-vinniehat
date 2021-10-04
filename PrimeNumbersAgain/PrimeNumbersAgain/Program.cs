@@ -10,22 +10,50 @@ namespace PrimeNumbersAgain
             int n, prime;
             Stopwatch timer = new Stopwatch();
 
+            
+            // Start Initialization
             PrintBanner();
             n = GetNumber();
-
+            // Initialization Complete
+            
+            // Start The Algorithm
             timer.Start();
             prime = FindNthPrime(n);
             timer.Stop();
+            // Algorithm Complete
             
             
-            Console.WriteLine($"\nToo easy.. {prime} is the nth prime when n is {n}. I found that answer in {timer.Elapsed.Seconds} seconds.");
+            Console.WriteLine($"\nToo easy.. {prime} is the nth prime when n is {n}. I found that answer in {timer.Elapsed.Seconds}.{timer.Elapsed.Milliseconds} seconds.");
 
             EvaluatePassingTime(timer.Elapsed.Seconds);
         }
 
         static int FindNthPrime(int n)
         {
-            return 0;
+            int primeNumber = 0;
+            int primeNumbers = 0;
+            for (int i = 1; primeNumbers <= n; i++) // Set pN to less than or equal to n, which is what we want to find
+            {
+                System.Threading.Thread.Sleep(1); // This gives the PC a buffer between each check
+                bool boolean = true; // This boolean defines whether or not the current number, i, is prime or not
+                
+                // Checking if it can be divisible by any number from 2-one below the number itself
+                for (int x = 2; x < i; x++)
+                {
+                    
+                    if (i % x == 0) boolean = false;
+                    Console.WriteLine(i + " ----- " + x);
+                }
+                
+                // If it is not divisible, then set the primeNumber as the last known pN, and add it to the amt of pN's
+                if (boolean == true)
+                {
+                    primeNumber = i;
+                    primeNumbers++;
+                }
+            }
+
+            return primeNumber;
         }
 
         static int GetNumber()
