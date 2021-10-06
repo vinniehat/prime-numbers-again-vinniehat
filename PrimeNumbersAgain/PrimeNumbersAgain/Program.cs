@@ -6,6 +6,7 @@ namespace PrimeNumbersAgain
 {
     class Program
     {
+        private static int GLOBAL_MAX_PRIMES = 2000000;
         static void Main(string[] args)
         {
             int n, prime;
@@ -30,30 +31,69 @@ namespace PrimeNumbersAgain
             EvaluatePassingTime(timer.Elapsed.Seconds);
         }
 
+
+
+
+        private static bool IsPrime(int i) // i is the number we are testing currently.
+        {
+            bool isPrime = true;
+
+            for (int x = 2; x < i; x++)
+            {
+
+                if (i % x == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+
+            return isPrime;
+        }
+
         static int FindNthPrime(int n)
         {
             int numberOfPrimes = 0;
             int primeNthNumber = 0;
-            for (int i = 2; i < 2000000; i++)
-            {
-                if (numberOfPrimes == n) break;
+            // for (int i = 2; i < 2000000; i++)
+            // {
+            //     if (numberOfPrimes == n) break;
+            //
+            //     for (int x = 2; x < i; x++)
+            //     {
+            //         if (numberOfPrimes == n) break;
+            //         if (i % x != 0)
+            //         {
+            //             numberOfPrimes++;
+            //             primeNthNumber = i;
+            //         }
+            //     }
+            //
+            //
+            // }
+            
 
-                for (int x = 2; x < i; x++)
+            for (int i = 2; i < GLOBAL_MAX_PRIMES; i++) // i is the number we are testing currently.
+            {
+                if (IsPrime(i))
                 {
-                    if (numberOfPrimes == n) break;
-                    if (i % x != 0)
-                    {
-                        numberOfPrimes++;
-                        primeNthNumber = i;
-                    }
+                    numberOfPrimes++;
                 }
 
-
+                if (numberOfPrimes == n)
+                {
+                    primeNthNumber = i;
+                    break;
+                }
             }
+            
+            
 
 
             return primeNthNumber;
         }
+        
 
         static int GetNumber()
         {
