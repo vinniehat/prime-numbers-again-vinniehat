@@ -38,7 +38,9 @@ namespace PrimeNumbersAgain
         {
             bool isPrime = true;
 
-            for (int x = 2; x < i; x++)
+            int sqrtI = (int) Math.Sqrt(i);
+            
+            for (int x = 2; x <= sqrtI; x++)
             {
 
                 if (i % x == 0)
@@ -74,18 +76,21 @@ namespace PrimeNumbersAgain
             // }
             
 
-            for (int i = 2; i < GLOBAL_MAX_PRIMES; i++) // i is the number we are testing currently.
+            int i = 2;
+            while (true)
             {
                 if (IsPrime(i))
                 {
                     numberOfPrimes++;
                 }
-
+                
                 if (numberOfPrimes == n)
                 {
                     primeNthNumber = i;
                     break;
                 }
+
+                i++;
             }
             
             
